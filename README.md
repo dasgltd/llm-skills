@@ -23,7 +23,6 @@ If you are using Google Antigravity, you can configure your local skills directo
 | [apps-script-workflow](./skills/apps-script-workflow/) | Transforms the AI into a proactive Google Apps Script developer. Defines rigorous methods for local deployment via clasp, automatic UI menus, Toasts for user feedback, and defensive Google Sheets programming. |
 | [code-documentation-expert](./skills/code-documentation-expert/) | Enforces strict technical writing standards for AI Agents, guaranteeing robust docstrings (JSDoc, PEP), architecture explanations over obvious syntax repeating, and automatic insertion of version control headers and copyrights. |
 | [git-workflow](./skills/git-workflow/) | Configures an autonomous Git operator, training the AI to chain standard version control commands silently and efficiently while implementing Semantic Commits and protecting upstream branches. |
-| [mcp-builder](./skills/mcp-builder/) | The definitive guide for an AI to build robust Model Context Protocol (MCP) servers using FastMCP (Python) or SDKs (Node), focusing on strict JSON Schema definitions, error boundaries, and dynamic Resources. |
 | [open-source-publisher](./skills/open-source-publisher/) | A strict DevSecOps firewall skill. Forbids the AI from pushing code to public repositories without a mandatory sanitization phase to prevent data leaks (API Keys, secrets), while automatically handling Open Source SEO. |
 
 ---

@@ -10,7 +10,6 @@ The primary purpose of these skills is to upgrade standard Large Language Models
 - `code-documentation-expert`: Teaches the AI to enforce strict technical writing and docstring standards.
 - `firebase-spark-deploy-workaround`: A specific AI workaround to deploy modern frameworks (Next.js/React) on Firebase Hosting Spark Plan (Free Tier) via GitHub Actions, bypassing Cloud Functions limitations.
 - `git-workflow`: Teaches the AI to operate Git autonomously, efficiently chaining commands and enforcing semantic commits.
-- `mcp-builder`: An expert guide for the AI to build robust Model Context Protocol (MCP) servers with strict JSON Schema definitions.
 - `n8n-workflow-updater`: Provides the AI with a safe lifecycle protocol to edit and deploy n8n workflows without hitting API payload errors.
 - `open-source-publisher`: A DevSecOps firewall that forces the AI to sanitize private data (API keys, IP addresses) before publishing code publicly.
 - `wordpress-deploy-optimizer`: Transforms the AI into a WordPress DevOps engineer, automating Rsync deployments and Yoast SEO WP-CLI injections.
