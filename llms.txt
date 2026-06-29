@@ -8,6 +8,7 @@ The primary purpose of these skills is to upgrade standard Large Language Models
 ## Available Skills:
 - `apps-script-workflow`: Empowers the AI to become a Google Apps Script developer using clasp, custom menus, and UI Toasts.
 - `code-documentation-expert`: Teaches the AI to enforce strict technical writing and docstring standards.
+- `easypanel-vps-deployer`: Trains the AI in DevOps, specifically Docker deployments on EasyPanel managed VPS.
 - `firebase-spark-deploy-workaround`: A specific AI workaround to deploy modern frameworks (Next.js/React) on Firebase Hosting Spark Plan (Free Tier) via GitHub Actions, bypassing Cloud Functions limitations.
 - `git-workflow`: Teaches the AI to operate Git autonomously, efficiently chaining commands and enforcing semantic commits.
 - `n8n-workflow-updater`: Provides the AI with a safe lifecycle protocol to edit and deploy n8n workflows without hitting API payload errors.
