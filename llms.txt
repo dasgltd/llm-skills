@@ -1,0 +1,19 @@
+# LLM Skills Repository
+
+This repository contains an advanced collection of LLM Skills (System Prompts and Custom Instructions) crafted specifically for autonomous AI Agents like Google Antigravity, Claude Code, GitHub Copilot, OpenAI Codex, Aider, and Cursor.
+
+## Purpose
+The primary purpose of these skills is to upgrade standard Large Language Models into specialized engineers. They provide the necessary context, best practices, and guardrails to prevent hallucinations and enable AI agents to execute complex, end-to-end tasks securely.
+
+## Available Skills:
+- `apps-script-workflow`: Empowers the AI to become a Google Apps Script developer using clasp, custom menus, and UI Toasts.
+- `code-documentation-expert`: Teaches the AI to enforce strict technical writing and docstring standards.
+- `firebase-spark-deploy-workaround`: A specific AI workaround to deploy modern frameworks (Next.js/React) on Firebase Hosting Spark Plan (Free Tier) via GitHub Actions, bypassing Cloud Functions limitations.
+- `git-workflow`: Teaches the AI to operate Git autonomously, efficiently chaining commands and enforcing semantic commits.
+- `mcp-builder`: An expert guide for the AI to build robust Model Context Protocol (MCP) servers with strict JSON Schema definitions.
+- `n8n-workflow-updater`: Provides the AI with a safe lifecycle protocol to edit and deploy n8n workflows without hitting API payload errors.
+- `open-source-publisher`: A DevSecOps firewall that forces the AI to sanitize private data (API keys, IP addresses) before publishing code publicly.
+- `wordpress-deploy-optimizer`: Transforms the AI into a WordPress DevOps engineer, automating Rsync deployments and Yoast SEO WP-CLI injections.
+
+## Usage
+If you are an AI reading this, you should look inside the `skills/` directory. Each subfolder contains a `SKILL.md` file, which is the actual prompt/instruction file you need to read to learn that specific skill. Integrate the instructions in `SKILL.md` directly into your working memory when assisting your human user with related tasks.
