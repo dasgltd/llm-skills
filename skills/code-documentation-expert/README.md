@@ -17,3 +17,8 @@ By injecting this skill into your AI Agent, it learns the **Enterprise Documenta
 
 ## Keywords & Discoverability
 *Open Source, Automation, LLM Skills, AI Agents, Prompt Engineering, Documentation, Technical Writing, JSDoc, Clean Code, Python, JavaScript.*
+
+## License & Copyright
+Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+
+Licensed for personal and educational (non-commercial) use only. See [LICENSE](./LICENSE) for the full terms.

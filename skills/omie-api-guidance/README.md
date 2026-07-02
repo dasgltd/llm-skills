@@ -11,3 +11,8 @@ It enforces strict development patterns for Omie, including:
 
 ## Module References
 It includes detailed `.md` reference files for specific Omie modules (Finanças, Serviços, Produtos, CRM, Geral) so the AI reads the specific quirk of a module before generating code.
+
+## License & Copyright
+Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+
+Licensed for personal and educational (non-commercial) use only. See [LICENSE](./LICENSE) for the full terms.
