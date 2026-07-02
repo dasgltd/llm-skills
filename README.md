@@ -27,6 +27,7 @@ If you are using Google Antigravity, you can configure your local skills directo
 | [omie-api-guidance](./skills/omie-api-guidance/) | Best practices, architectural patterns, and known quirks/limitations for integrating with the Omie ERP API. |
 | [open-source-publisher](./skills/open-source-publisher/) | A strict DevSecOps firewall skill. Forbids the AI from pushing code to public repositories without a mandatory sanitization phase to prevent data leaks (API Keys, secrets), while automatically handling Open Source SEO. |
 | [mcp-builder](./skills/mcp-builder/) | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Licensed under Apache 2.0 (Copyright 2026 Anthropic, PBC), modified by DASG. |
+| [project-briefing-interview](./skills/project-briefing-interview/) | Turns the AI into a product-minded briefing interviewer. Before coding, it runs a right-sized discovery (4 tiers, from zero questions to full product discovery), estimates effort with a model-tier gate, and outputs a consolidated briefing plus a master prompt ready for any coding LLM. |
 
 ---
 *This is an open-source repository in constant evolution. New LLM Skills for automation, productivity, and web development will be added over time.*
