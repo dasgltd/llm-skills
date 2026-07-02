@@ -17,3 +17,8 @@ By equipping your AI Agent with this skill, it learns the **Automated WordPress 
 
 ## Keywords & Discoverability
 *Open Source, Automation, LLM Skills, AI Agents, Prompt Engineering, WordPress, WP-CLI, SEO, Yoast SEO, PageSpeed, Rsync Deployment, DevOps.*
+
+## License & Copyright
+Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+
+Licensed for personal and educational (non-commercial) use only. See [LICENSE](./LICENSE) for the full terms.

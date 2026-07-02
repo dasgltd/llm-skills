@@ -30,6 +30,7 @@ Public repositories carry the user's professional identity. Standardize it:
 - **No AI co-authorship by default.** Do NOT add AI co-author trailers (e.g. `Co-Authored-By: Claude/Copilot/...`) to commits, and do NOT add "implemented by AI" credits in READMEs, file headers, or skill/frontmatter metadata — unless the user explicitly asks for them. The human user is the sole author of record.
 - **All public documentation in English.** READMEs, SKILL.md files, comments, and commit messages targeting a public repository are written in English: better SEO, wider reach, and lower token cost for AI agents that load them. Keep another language only if the user explicitly targets a local-language audience.
 - **Third-party methodologies:** if the underlying practices are industry-standard, use a generic name for the artifact and add a discreet acknowledgment (one line in the README or a reference file) — never put a third-party brand in the artifact's name or spotlight.
+- **Every published component carries the license.** Each skill/package folder must contain a copy of the repository's LICENSE file plus a short "License & Copyright" section at the end of its README. People copy individual folders out of a repository, so legal protection must travel with each folder — a root-level LICENSE alone does not follow the copy. Exception: third-party-derived content (e.g. Apache 2.0 material) keeps its ORIGINAL license and NOTICE files intact; never apply a proprietary EULA over permissively-licensed work.
 
 ## 4. Leak Prevention & Containment (Data Leak Protocol)
 

@@ -42,3 +42,8 @@ Once this is done, the AI Agent will be able to `rsync` files and run deployment
 
 ## Keywords & Discoverability
 *Open Source, Automation, LLM Skills, AI Agents, Prompt Engineering, EasyPanel, VPS, Server Deployment, Docker, DevOps, CI/CD, Containerization, SSH.*
+
+## License & Copyright
+Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+
+Licensed for personal and educational (non-commercial) use only. See [LICENSE](./LICENSE) for the full terms.

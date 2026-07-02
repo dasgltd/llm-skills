@@ -1,0 +1,20 @@
+Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+
+DASG CONSULTING LTDA IS A LIMITED LIABILITY COMPANY REGISTERED IN BRAZIL. THIS LICENSE APPLIES WORLDWIDE.
+
+END-USER LICENSE AGREEMENT (EULA) & DISCLAIMER
+
+1. OWNERSHIP AND COPYRIGHT
+The source code, structured prompts (Skills), and instruction manuals contained in this repository are the exclusive intellectual property of DASG Consulting Ltda.
+
+2. PERMITTED USE
+Permission is granted, free of charge, to any person obtaining a copy of this software (the "Skills"), to use them strictly for PERSONAL or educational (non-commercial) purposes.
+
+3. RESTRICTIONS (NON-COMMERCIALIZATION)
+It is expressly PROHIBITED to resell, sublicense, redistribute for a fee, or otherwise commercialize the original code/prompts contained herein without the prior, express, and written authorization of DASG Consulting Ltda.
+
+4. DISCLAIMER AND ASSUMPTION OF RISK
+The software is provided "AS IS", without warranty of any kind, express or implied. In no event shall DASG Consulting Ltda be held liable for any damages, data loss, information leaks, downtime, lost profits, operational disruptions, or misuse arising from the use of these Skills. The user assumes 100% of the risk when using these files in their own environments and servers.
+
+5. ARTIFICIAL INTELLIGENCE NOTICE (NON-DETERMINISTIC NATURE)
+The "Skills" published here are structured instructions designed to guide Large Language Models (LLMs) and Autonomous AI Agents. Due to the probabilistic, generative, and non-deterministic nature of Artificial Intelligence, each model (e.g., Claude, GPT-4, Gemini) may interpret the prompts differently. DASG Consulting Ltda DOES NOT guarantee absolute, identical, or perfectly accurate results across all executions, and warns the user about the possibility of AI hallucinations or unexpected behaviors.
