@@ -11,6 +11,7 @@ The primary purpose of these skills is to upgrade standard Large Language Models
 - `easypanel-vps-deployer`: Trains the AI in DevOps, specifically Docker deployments on EasyPanel managed VPS.
 - `firebase-spark-deploy-workaround`: A specific AI workaround to deploy modern frameworks (Next.js/React) on Firebase Hosting Spark Plan (Free Tier) via GitHub Actions, bypassing Cloud Functions limitations.
 - `git-workflow`: Teaches the AI to operate Git autonomously, efficiently chaining commands and enforcing semantic commits.
+- `infinity-api-guidance`: Best practices and known quirks for integrating with the Infinity (StartInfinity) project management API — auth/versioning, value upserts, webhook payload shapes and cascade dedupe, comments, time tracking, and n8n integration patterns.
 - `mcp-builder`: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Licensed under Apache 2.0 (Copyright 2026 Anthropic, PBC), modified by DASG.
 - `n8n-workflow-updater`: Provides the AI with a safe lifecycle protocol to edit and deploy n8n workflows without hitting API payload errors.
 - `omie-api-guidance`: Best practices, architectural patterns, and known quirks/limitations for integrating with the Omie ERP API.
