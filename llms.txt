@@ -11,6 +11,7 @@ The primary purpose of these skills is to upgrade standard Large Language Models
 - `easypanel-vps-deployer`: Trains the AI in DevOps, specifically Docker deployments on EasyPanel managed VPS.
 - `firebase-spark-deploy-workaround`: A specific AI workaround to deploy modern frameworks (Next.js/React) on Firebase Hosting Spark Plan (Free Tier) via GitHub Actions, bypassing Cloud Functions limitations.
 - `git-workflow`: Teaches the AI to operate Git autonomously, efficiently chaining commands and enforcing semantic commits.
+- `mcp-builder`: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Licensed under Apache 2.0 (Copyright 2026 Anthropic, PBC), modified by DASG.
 - `n8n-workflow-updater`: Provides the AI with a safe lifecycle protocol to edit and deploy n8n workflows without hitting API payload errors.
 - `open-source-publisher`: A DevSecOps firewall that forces the AI to sanitize private data (API keys, IP addresses) before publishing code publicly.
 - `wordpress-deploy-optimizer`: Transforms the AI into a WordPress DevOps engineer, automating Rsync deployments and Yoast SEO WP-CLI injections.

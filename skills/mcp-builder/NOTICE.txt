@@ -1,0 +1,8 @@
+This project includes material from the original Model Context Protocol documentation and reference implementations.
+
+Copyright 2026 Anthropic, PBC.
+Licensed under the Apache License, Version 2.0.
+
+Modifications:
+- Modified by DASG Consulting Ltda. to function as an autonomous LLM Skill format.
+- Restructured content to fit the 'SKILL.md' execution standard.

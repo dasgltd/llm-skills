@@ -25,6 +25,7 @@ If you are using Google Antigravity, you can configure your local skills directo
 | [easypanel-vps-deployer](./skills/easypanel-vps-deployer/) | Transforms your AI into a VPS DevOps engineer. Outlines exact patterns for deploying Docker containers, managing databases, and injecting `.env` securely inside EasyPanel environments using generic SSH keys. |
 | [git-workflow](./skills/git-workflow/) | Configures an autonomous Git operator, training the AI to chain standard version control commands silently and efficiently while implementing Semantic Commits and protecting upstream branches. |
 | [open-source-publisher](./skills/open-source-publisher/) | A strict DevSecOps firewall skill. Forbids the AI from pushing code to public repositories without a mandatory sanitization phase to prevent data leaks (API Keys, secrets), while automatically handling Open Source SEO. |
+| [mcp-builder](./skills/mcp-builder/) | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Licensed under Apache 2.0 (Copyright 2026 Anthropic, PBC), modified by DASG. |
 
 ---
 *This is an open-source repository in constant evolution. New LLM Skills for automation, productivity, and web development will be added over time.*
