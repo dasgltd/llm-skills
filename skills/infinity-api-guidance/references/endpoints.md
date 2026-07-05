@@ -19,6 +19,16 @@ Full official reference: https://devdocs.startinfinity.com
 
 **Gotcha:** there is NO `POST /items/{item}/values` route — writing values is ALWAYS the `PUT` on the item shown above (upsert semantics; only the attributes you send are touched).
 
+## References (item-to-item relations)
+
+| Action | Method + Path |
+|--------|---------------|
+| Create link | `POST /workspaces/{ws}/boards/{board}/references` (body: `{"attribute_id", "from_item_id", "to_item_id"}`) → `201`, returns `reference` object with its own `id` |
+| Read / list | ❌ returns "Removed in selected version" in current API versions |
+| Delete | ❌ returns "Removed in selected version" in current API versions |
+
+**Gotcha:** a `reference`-type attribute is NOT writable through the item `PUT` — sending it in the `values` array returns `422` ("use the Create reference endpoint"). Use the dedicated `POST …/references` above; for a multi-selection reference issue one POST per target item. You can only CREATE references by API — read and delete are disabled in current versions, so verification is visual in the UI and cleanup is manual. Save each returned reference `id` at creation time (it is your only handle).
+
 ## Comments
 
 | Action | Method + Path |
@@ -56,3 +66,5 @@ Events: `item.created`, `item.updated`, `item.deleted`, `value.created`, `value.
 | `404` on `POST …/items/{item}/values` | Route does not exist — use `PUT` on the item |
 | `405` on `GET …/time-tracking` | Listing not supported — only `POST`/`PUT`/`DELETE` |
 | `422` listing `item_id`/`attribute_id` | Time-tracking start requires exactly those two fields |
+| `422` writing a `reference` attribute via item `PUT` | References are not value-writable — use `POST …/references` (`attribute_id`/`from_item_id`/`to_item_id`) |
+| "Removed in selected version" on reference GET/DELETE | Read & delete of references are disabled in current API versions — create-only; verify/clean up in the UI |
