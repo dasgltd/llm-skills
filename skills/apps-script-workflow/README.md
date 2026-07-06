@@ -19,6 +19,6 @@ By injecting this skill into your AI Agent, it learns the **Pro Methodology for 
 *Open Source, Automation, LLM Skills, AI Agents, Prompt Engineering, Google Apps Script, GAS, Clasp, Google Sheets, Low Code, JavaScript.*
 
 ## License & Copyright
-Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+Copyright (c) 2026 Daniel A. Silva de la Garza / DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
 
 Licensed for personal and educational (non-commercial) use only. See [LICENSE](./LICENSE) for the full terms.

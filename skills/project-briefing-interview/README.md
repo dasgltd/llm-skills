@@ -26,6 +26,6 @@ The interview structure was adapted from the "NoCode Startup AI" framework (a Br
 *Open Source, LLM Skills, AI Agents, Prompt Engineering, Product Discovery, PRD, Briefing, MVP Scoping, Master Prompt, Vibe Coding, Requirements Engineering, Claude Code, Antigravity, Codex, Cursor.*
 
 ## License & Copyright
-Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+Copyright (c) 2026 Daniel A. Silva de la Garza / DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
 
 Licensed for personal and educational (non-commercial) use only. See [LICENSE](./LICENSE) for the full terms.
