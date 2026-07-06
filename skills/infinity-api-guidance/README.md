@@ -16,6 +16,6 @@ It includes detailed `.md` reference files so the AI reads the exact payload sha
 - `references/endpoints.md` — endpoint quick reference with methods, bodies, and common error signatures.
 
 ## License & Copyright
-Copyright (c) 2026 DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
+Copyright (c) 2026 Daniel A. Silva de la Garza / DASG Consulting Ltda. (CNPJ: 61.628.969/0001-04). All rights reserved.
 
 Licensed for personal and educational (non-commercial) use only. See [LICENSE](./LICENSE) for the full terms.
