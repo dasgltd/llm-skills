@@ -1,35 +1,42 @@
 ---
 name: git-workflow
-description: Use this skill whenever the user asks to save, backup, commit, or push code to Git or GitHub. This skill dictates how to perform git operations efficiently in Antigravity to minimize user intervention and approval clicks.
+description: Use this skill whenever you (agent or IDE assistant) save, backup, commit, push, branch, open a PR, or rewrite git history on any dasgltd repo. Canonical git convention shared across BOTH ends — Antigravity/Claude on the Mac and Craudinho/Hermes on the Vostro. Read it before any git write.
 ---
 
-# Antigravity Git Workflow
+# DASG Git Workflow (canonical — both machines)
 
-## Why this skill exists
-When interacting with Git in Antigravity, running separate commands for `git status`, `git add`, `git commit`, and `git push` creates a poor user experience. Every individual command proposed requires the user to manually click an "Approve" button in the UI.
+GitHub (`dasgltd`, private polyrepo) is the single source of truth. The same repos are cloned on the Mac (Antigravity IDE) and on the Vostro (Craudinho/Hermes headless). This skill is git-versioned in `llm-skills` and synced to both ends, so the rule is identical everywhere.
 
-To minimize user intervention and make the experience seamless, we must chain git commands together in a single execution step and proactively generate commit messages without asking.
+## The five rules
 
-## The Optimal Git Workflow
+1. **Pull before, push after.** Start every work session with `git pull --ff-only`; push when you finish a unit of work. Never let a machine drift.
+2. **PR-based gate for agent work (model A).** Autonomous/agent sessions (Craudinho, or any non-trivial change) do **not** push straight to `main`. Work on a branch, open a PR, and **Daniel merges** — the human review is the gate. Only trivial solo edits made deliberately by Daniel himself may go direct to `main`.
+3. **No lock, but single-writer (model B).** There is no file locking. So **only one session mutates a given repo at a time.** Two sessions committing to the same repo in parallel corrupt each other — if you detect another `claude`/agent process operating the same repo, stop writing and reconcile before proceeding.
+4. **Force-push only for authorized history cleanup, and back up first.** History rewrites (`git-filter-repo`, purge of secrets/scratch) are allowed with Daniel's authorization, but **always push a `backup/pre-*` ref to origin first** so the pre-rewrite history is recoverable, then force-push the rewritten branch. Never force-push without that safety ref.
+5. **Never commit secrets.** No `.env`, key, token, or hardcoded credential in tracked files — ever. Secrets live in `sops+age` (`.env.sops` committed, plaintext `.env` gitignored). A committed secret is a compromised secret; if one lands, rotate + purge history.
 
-Whenever the user asks to backup, save, or push code, do **NOT** ask them for permission to proceed. Do **NOT** ask them what the commit message should be. Do **NOT** run `git status` as a separate preliminary step unless absolutely necessary for your own context.
+## Execution pattern
 
-Instead, proactively infer a high-quality commit message based on the work you just completed, and execute a single chained command to stage, commit, and push the files.
-
-### Execution Pattern
-
-Use the `run_command` tool with the following chained command structure:
+Conventional commits, chained to minimize approvals:
 
 ```bash
-git add . && git commit -m "type(scope): [your descriptive message here]" && git push
+git pull --ff-only
+# ...work...
+git checkout -b type/short-topic
+git add <specific files> && git commit -m "type(scope): descriptive message" && git push -u origin type/short-topic
+gh pr create --fill   # Daniel reviews & merges
 ```
 
-If you only modified specific files and want to be precise to avoid committing untracked files, you can list them explicitly:
+For an authorized history purge:
+
 ```bash
-git add file1.ts file2.tsx && git commit -m "fix(ui): [message]" && git push
+git branch backup/pre-purge && git push origin backup/pre-purge   # safety net on origin
+git filter-repo --replace-text redactions.txt --force             # or --invert-paths for whole files
+git remote add origin <url>                                       # filter-repo drops the remote
+git push origin main --force                                      # backup ref stays untouched
 ```
 
-### Key Principles
-1. **Zero Verbal Permission**: Just propose the command directly. The user will review the command in the Antigravity UI popup and approve it there. 
-2. **Minimize Clicks**: Always chain `git add`, `git commit`, and `git push` with `&&`. This reduces the UI approval clicks from 3 down to exactly 1.
-3. **Conventional Commits**: Use semantic prefixes (e.g., `feat:`, `fix:`, `refactor:`, `style:`) summarizing the exact tasks you just completed in the conversation.
+Prefer conventional prefixes (`feat`, `fix`, `refactor`, `chore`, `style`) summarizing exactly what was done.
+
+## Antigravity note (Mac)
+In the Antigravity UI, chain `add && commit && push` into one step so the user approves once, and infer the commit message without asking. But the destination is a **PR branch**, not `main`, for anything beyond a trivial solo edit — the gate in rule 2 still applies.
