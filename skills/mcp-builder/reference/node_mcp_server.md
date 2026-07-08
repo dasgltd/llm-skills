@@ -724,7 +724,13 @@ async function runHTTP() {
   const app = express();
   app.use(express.json());
 
-  app.post('/mcp', async (req, res) => {
+  // Mount all routes on a Router so we can serve them in more than one place.
+  const routes = express.Router();
+
+  // Unauthenticated liveness probe for orchestrators / healthchecks.
+  routes.get('/health', (_req, res) => res.json({ status: 'ok' }));
+
+  routes.post('/mcp', async (req, res) => {
     const transport = new StreamableHTTPServerTransport({
       sessionIdGenerator: undefined,
       enableJsonResponse: true
@@ -734,9 +740,24 @@ async function runHTTP() {
     await transport.handleRequest(req, res, req.body);
   });
 
+  // Dual-mount: always at root, and ALSO under an optional BASE_PATH.
+  // Root keeps internal DNS callers (sibling containers) and the Docker
+  // HEALTHCHECK working; BASE_PATH lets a path-routing reverse proxy expose
+  // this server as one entry in a hub like `server.example.com/<service>/mcp`
+  // WITHOUT the proxy having to strip the prefix. See "Path-based routing &
+  // multi-server hubs" in mcp_best_practices.md.
+  app.use('/', routes);
+  const basePath = (process.env.BASE_PATH || '').replace(/\/$/, '');
+  if (basePath) {
+    app.use(basePath, routes);
+  }
+
   const port = parseInt(process.env.PORT || '3000');
   app.listen(port, () => {
     console.error(`MCP server running on http://localhost:${port}/mcp`);
+    if (basePath) {
+      console.error(`  also serving under base path ${basePath}/mcp`);
+    }
   });
 }
 

@@ -4,13 +4,13 @@ description: Guide for creating high-quality MCP (Model Context Protocol) server
 license: Complete terms in LICENSE.txt
 ---
 
-# MCP Server Development Guide
-
 > [!NOTE]
 > **Derivative Work Notice**
 > This skill is derived from the official Anthropic Model Context Protocol (MCP) documentation.
 > It is licensed under the Apache License 2.0 (Copyright 2026 Anthropic, PBC).
 > It has been modified by DASG Consulting Ltda. See the `NOTICE.txt` and `LICENSE.txt` files for complete terms and attributions.
+
+# MCP Server Development Guide
 
 ## Overview
 
@@ -39,6 +39,15 @@ Agents benefit from concise tool descriptions and the ability to filter/paginate
 
 **Actionable Error Messages:**
 Error messages should guide agents toward solutions with specific suggestions and next steps.
+
+**Access Control for Shared/Remote Servers:**
+When one deployed server is reached by many clients, gate capability in tiers (`read < write < admin`) resolved per request from a secret header — read is always on, write and delete require a key. See the *Capability-Based Access Control* section in [📋 MCP Best Practices](./reference/mcp_best_practices.md).
+
+**Remote Deployment & Path-Based Hubs:**
+To host many MCP servers behind one hostname, route by path (`server.example.com/<service>/mcp`) instead of one subdomain each. **Dual-mount** the routes at root `/` *and* under a configurable `BASE_PATH` so internal-DNS callers and the container healthcheck keep working on root while the public hub path maps to `BASE_PATH` (no proxy strip needed). Keep the endpoint DNS-only behind anti-bot proxies, and remember the registry **package** visibility is separate from repo visibility. See *Path-based routing & multi-server hubs* and the deployment field notes in [📋 MCP Best Practices](./reference/mcp_best_practices.md).
+
+**Wrapping Messy Real-World APIs:**
+Present a clean, human-shaped interface and absorb the vendor's quirks silently (payload key casing, server-generated option IDs, name↔UUID translation). When docs are incomplete, reverse-engineer payloads by creating the object in the vendor UI and fetching it back. See *Field Notes: Wrapping Real-World APIs* in [📋 MCP Best Practices](./reference/mcp_best_practices.md).
 
 #### 1.2 Study MCP Protocol Documentation
 
@@ -233,8 +242,10 @@ Load these resources as needed during development:
   - Server and tool naming conventions
   - Response format guidelines (JSON vs Markdown)
   - Pagination best practices
-  - Transport selection (streamable HTTP vs stdio)
+  - Transport selection (streamable HTTP vs stdio) + remote/Docker deployment notes (dual-mount, path-based hubs)
   - Security and error handling standards
+  - **Capability-based access control** (read/write/admin permission tiers, per-request key)
+  - **Field Notes: Wrapping Real-World APIs** (quirk absorption, round-trip reverse-engineering, name↔UUID translation, blueprint-before-bulk-write)
 
 ### SDK Documentation (Load During Phase 1/2)
 - **Python SDK**: Fetch from `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
