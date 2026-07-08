@@ -23,6 +23,18 @@ All GAS development should happen locally, using `clasp` to push changes.
   ```
 - **Cache Awareness**: Google Apps Script caches library versions heavily. If you push code to a library, you MUST bump the version via `npx clasp version` and update the dependency version in the client's `appsscript.json` (or bring the dependent code into the main script to bypass the cache entirely).
 
+### 1.1 Fallback: `clasp push` fails with "Premature close" (proxy/gaxios issue)
+
+Some sandboxed/proxied environments break the `clasp` CLI's internal HTTP client (`gaxios`, used for both OAuth token refresh and the Apps Script API call) with an error like `Invalid response body ... Premature close`, even though the network itself is fine. Diagnose before assuming it's unfixable:
+
+- **Confirm it's the client, not the network**: try a raw `curl` or Node `https` request to the same hosts (`oauth2.googleapis.com`, `script.googleapis.com`). If those succeed while `clasp` fails, it's a `gaxios`/keep-alive incompatibility with the local proxy, not a real connectivity block.
+- **Do NOT give up and hand the push to a human** as the first move — that should be the last resort, not the default. Try the raw-HTTPS fallback first.
+- **Fallback script**: reproduce `clasp push -f` manually with a raw Node `https` request, bypassing `clasp`/`gaxios` entirely:
+  1. Refresh the OAuth token via `POST https://oauth2.googleapis.com/token` using the `client_id`/`client_secret`/`refresh_token` stored in `~/.clasprc.json` (`tokens.default`), and write the new `access_token`/`expiry_date` back into that same file.
+  2. Read `.clasp.json` for the `scriptId`, collect the project's `.js`/`.json`/`.gs`/`.html` files (respecting `.claspignore`), and `PUT https://script.googleapis.com/v1/projects/<scriptId>/content` with `Authorization: Bearer <access_token>` and the files payload (same shape `clasp push` sends: `{ files: [{ name, type, source }] }`).
+  - A reusable version of this lives at `~/.local/bin/clasp-push-raw.sh <project-dir>` — use/port it instead of rewriting from scratch.
+- **Root cause note**: this has shown up as two distinct issues so far, don't assume it's always the same one — always confirm with curl/raw-https before picking a fix: (a) on a Vostro/Node-22.23+ host, a Node `http.Agent` keep-alive regression (CVE-2026-48931 fix) makes `node-fetch@2` — which `gaxios`/`google-auth-library` depend on — throw a false `ERR_STREAM_PREMATURE_CLOSE`; fix there is running under an older Node via `nvm` (see persistent memory for exact version). (b) in some agent sandboxes, `gaxios` itself breaks against the local egress proxy while raw Node `https` works fine — fix there is the raw-HTTPS fallback above.
+
 ## 2. Menu Personalizado: "Pro Tools"
 
 Every user-facing script bound to Google Sheets MUST create a custom menu upon opening the document (`onOpen`). The root menu should always be named **"Pro Tools"**.
