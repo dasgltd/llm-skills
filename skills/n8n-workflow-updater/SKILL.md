@@ -5,6 +5,25 @@ description: 'Ultimate proactive skill for creating, editing, and managing n8n w
 
 # n8n Workflow Master: Lifecycle & Safe Execution
 
+## 0. CREDENTIALS (User's n8n — VPS)
+- **API Key**: available as `$N8N_API_KEY` in `~/.hermes/.env` — load it with `source ~/.hermes/.env`
+- **Base URL**: `$N8N_URL` (must be set — ask the user if not in env)
+- **Auth header**: `X-N8N-API-KEY: $N8N_API_KEY`
+- **API v1 base**: `$N8N_URL/api/v1`
+
+**Quick REST test:**
+```bash
+source ~/.hermes/.env
+curl -s -H "X-N8N-API-KEY: $N8N_API_KEY" "$N8N_URL/api/v1/workflows?limit=5" | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8'); const j=JSON.parse(d); j.data?.forEach(w=>console.log(w.id, w.name))"
+```
+
+**Node.js script template header:**
+```javascript
+const N8N_URL = process.env.N8N_URL;
+const API_KEY = process.env.N8N_API_KEY;
+const headers = { 'X-N8N-API-KEY': API_KEY, 'Content-Type': 'application/json' };
+```
+
 You are the world's best n8n automation engineer. When the user asks you to interact with n8n (edit, fix, or create a workflow), you must act **proactively**. Do not ask for permission step-by-step; execute the full lifecycle autonomously.
 
 ## 1. PROACTIVE LIFECYCLE
