@@ -55,3 +55,20 @@ Para detalhes microscópicos de cada módulo, leia obrigatoriamente a referênci
   Leia o arquivo: `references/crm.md`
 - **Para Geral** (Clientes, Fornecedores, Categorias, Cadastros Auxiliares):
   Leia o arquivo: `references/geral.md`
+
+## 6. Controle de Superfície de Ferramentas por Instância/Workflow (omie-mcp-server)
+
+O `omie-mcp-server` (repo `dasgltd/omie-mcp-server`) agrupa cada tool em um "módulo" lógico (`clientes`, `produtos`, `vendas`, `notas_fiscais`, `financeiro`, `compras`, `servicos`, `estoque`, `cadastros_auxiliares`, `empresa`) via o mapa `TOOL_MODULES` em `src/index.ts`. Existem **duas camadas** de filtro, para dois níveis de necessidade diferentes:
+
+### Camada 1 — Nível de instância (env var `OMIE_ENABLED_MODULES`)
+- Controla quais módulos existem **globalmente** naquela instância do MCP server (ex: uma instância de teste que só deve expor Financeiro).
+- Configurar: env var `OMIE_ENABLED_MODULES` (lista separada por vírgula, ex: `financeiro,cadastros_auxiliares`). Vazia/ausente = todos os módulos ativos (retrocompatível).
+- **Onde editar de forma visual:** no EasyPanel, aba *Environment* do serviço `omie-mcp` — é um editor de texto simples (`KEY=VALUE`), já documentado com a lista de módulos disponíveis em `.env.example`. Depois de editar, precisa **restart do container** (a env var só é lida no boot).
+- **Para checar o status atual sem entrar no EasyPanel:** chame a tool `list_modules_status` (sem parâmetros) — retorna a lista de módulos com ✅/❌ direto no chat do n8n/Claude, incluindo instrução de como alterar.
+
+### Camada 2 — Nível de workflow n8n (nó "MCP Client Tool", sem precisar mexer no servidor)
+- Para restringir quais tools aparecem **em um workflow n8n específico** (sem afetar outros workflows nem exigir restart), use o parâmetro nativo do próprio nó `MCP Client Tool` do n8n (`@n8n/n8n-nodes-langchain.mcpClientTool`): campo **"Tools to Include"**, com 3 opções:
+  - `All` — expõe tudo que a instância permite (default).
+  - `Selected` — multi-select visual (checkboxes) das tools específicas a incluir.
+  - `All Except` — multi-select visual das tools a excluir.
+- Essa é a forma **mais simples e visual** de aplicar um filtro por workflow — é um campo nativo do n8n, sem precisar editar código, `.env` ou reiniciar nada. Preferir esta camada quando o filtro é específico de um agente/workflow; usar a Camada 1 (env var) quando o filtro é para a instância inteira (ex: instância de homologação vs. produção).
