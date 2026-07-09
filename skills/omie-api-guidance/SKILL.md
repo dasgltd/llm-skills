@@ -72,3 +72,25 @@ O `omie-mcp-server` (repo `dasgltd/omie-mcp-server`) agrupa cada tool em um "mó
   - `Selected` — multi-select visual (checkboxes) das tools específicas a incluir.
   - `All Except` — multi-select visual das tools a excluir.
 - Essa é a forma **mais simples e visual** de aplicar um filtro por workflow — é um campo nativo do n8n, sem precisar editar código, `.env` ou reiniciar nada. Preferir esta camada quando o filtro é específico de um agente/workflow; usar a Camada 1 (env var) quando o filtro é para a instância inteira (ex: instância de homologação vs. produção).
+
+## 7. Permissões de Escrita por Header (`X-MCP-Key`) — omie-mcp-server
+
+Desde o commit `96acf2e`, as tools de escrita (create_*/update_*/pay_* etc., 11 tools no Set `WRITE_TOOLS`) seguem o mesmo padrão de auth do `start-infinity-mcp-server`: o **nível de permissão é resolvido por sessão a partir do header HTTP `X-MCP-Key`**, e tools de escrita nem aparecem na lista quando o nível não autoriza.
+
+### Níveis e env vars (instância)
+- Níveis: `read` (só consultas) e `write` (tudo). Sem nível `admin` — não há tools destrutivas no domínio Omie hoje.
+- `OMIE_WRITE_KEY` — chave secreta; sessão que enviar `X-MCP-Key` igual a ela ganha nível `write`.
+- `OMIE_DEFAULT_LEVEL` — nível para sessões sem chave/chave errada. Default `read` (mais seguro). 
+- `OMIE_READ_ONLY=true` — kill switch: força `read` SEMPRE, vence tudo (inclusive chave correta).
+- `OMIE_MCP_KEY` — opcional, defesa em profundidade: se configurada, o path interno `/mcp` e `/message` passa a exigir `X-MCP-Key` (aceita esta chave ou a própria `OMIE_WRITE_KEY`). Vazia = path interno aberto (retrocompatível com n8n sem header). **Só preencher DEPOIS de configurar o header no n8n**, senão o n8n perde acesso.
+
+### Como configurar o header no n8n (visual)
+1. No nó **MCP Client Tool**, abra as opções de conexão/credencial do endpoint.
+2. Adicione um header customizado: nome `X-MCP-Key`, valor = a `OMIE_WRITE_KEY` (para agente com escrita) ou nada (agente somente leitura).
+3. Sem restart de nada — o nível é resolvido por sessão, na conexão.
+
+### Regra prática
+- Agentes de consulta/relatório → **sem header** (ficam `read`, não veem tools de escrita — o LLM nem tenta).
+- Agentes operacionais (criar cliente, baixar conta) → header com `OMIE_WRITE_KEY`.
+- Emergência ("congelar tudo") → `OMIE_READ_ONLY=true` no EasyPanel + restart.
+- As 3 camadas se compõem: módulos (`OMIE_ENABLED_MODULES`) ∩ nível do header (`X-MCP-Key`) ∩ filtro do nó n8n ("Tools to Include").
