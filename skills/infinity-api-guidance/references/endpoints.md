@@ -19,6 +19,8 @@ Full official reference: https://devdocs.startinfinity.com
 
 **Gotcha:** there is NO `POST /items/{item}/values` route — writing values is ALWAYS the `PUT` on the item shown above (upsert semantics; only the attributes you send are touched).
 
+**Response-shape gotcha:** the `GET item` response returns the `values` array at the **top level of the item object**, not nested under a `data` key. The item may or may not be wrapped in `{"data": …}` depending on endpoint/version — parse defensively (accept both `response.values` and `response.data.values`), or your reader silently gets an empty array and state/idempotency checks break.
+
 ## References (item-to-item relations)
 
 | Action | Method + Path |

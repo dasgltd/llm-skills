@@ -22,6 +22,7 @@ Official docs: https://devdocs.startinfinity.com
 
 - Hierarchy: **Workspace → Board → Folder → Item**. Attributes are defined at board level and attached per folder; items store a `values` array.
 - Read an item with its values: `GET .../items/{item}?expand[]=values`.
+- **Response-shape gotcha:** the item's `values` array is returned at the **TOP level of the item object**, not nested under a `data` key. Depending on the endpoint/version the item itself may or may not be wrapped in `{"data": …}`, so parse defensively — read `values` from both `response.values` and `response.data.values`. A handler that assumes only one shape silently reads an empty array (this breaks idempotency/state checks, which then act as if the item has no values).
 - **There is NO `POST .../items/{item}/values` route (404).** To create/update values: `PUT /workspaces/{ws}/boards/{board}/items/{item}` with body `{"values": [{"attribute_id": "…", "data": …}]}` — it behaves as an upsert.
 - **`data` format by attribute type:** label → array of label UUIDs · date → ISO 8601 string · rating → integer · checkbox → boolean · number → number · text/longtext → string · links → array of `{url, name}` objects. The links attribute accepts custom URI schemes (e.g. `app://…` deeplinks), useful for mobile shortcuts.
 - **`custom_id` (auto-increment ID) attributes:** `data` is the raw number; the prefix is display-only (changing the prefix later does not migrate anything). Treat as read-only.
