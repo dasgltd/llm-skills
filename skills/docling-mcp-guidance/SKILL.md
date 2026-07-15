@@ -35,7 +35,7 @@ Infinity, n8n-brain e Omie rodam inteiramente na VPS (Docker Swarm/EasyPanel).
 **Docling NAO** — e pesado demais para arriscar OOM na VPS de producao:
 
 ```
-cliente -> server.dasg.ltd/docling/mcp (VPS, publico, gate X-MCP-Key)
+cliente -> your.server.url/docling/mcp (VPS, publico, gate X-MCP-Key)
         -> [proxy EasyPanel/Swarm, porta 8104->3000 na tailnet]
         -> 100.85.101.119:3000 (Vostro, via Tailscale) — Caddy do container
         -> docling-mcp em 127.0.0.1:8000 (Streamable HTTP, FastMCP, IBM docling)
@@ -58,7 +58,7 @@ cliente -> server.dasg.ltd/docling/mcp (VPS, publico, gate X-MCP-Key)
 
 ```
 try:
-    resultado = docling(https://server.dasg.ltd/docling/mcp, header X-MCP-Key)
+    resultado = docling(https://your.server.url/docling/mcp, header X-MCP-Key)
 catch (timeout | 5xx | conexao recusada):
     resultado = gemini_vision(arquivo)   # plano B quando o Vostro esta fora
 ```

@@ -17,7 +17,7 @@
    - PDF **escaneado**, foto/print de documento
    - Nota fiscal, contrato, extrato **em imagem**
    - Tabelas de scan, layout em colunas, formulários
-   - Endpoint: `https://server.dasg.ltd/docling/mcp` (header `X-MCP-Key`)
+   - Endpoint: `https://your.server.url/docling/mcp` (header `X-MCP-Key`)
 
 3. **IMAGEM VISUAL → vision (nativo / Gemini)**
    Entender tela/foto, não extrair texto.
@@ -36,7 +36,7 @@ O docling processa no **Vostro** (24/7, mas cai em falta de energia/internet).
 
 ```
 try:
-    resultado = docling(  https://server.dasg.ltd/docling/mcp , header X-MCP-Key )
+    resultado = docling(  https://your.server.url/docling/mcp , header X-MCP-Key )
 catch (timeout | 5xx | conexão recusada):
     resultado = gemini_vision(arquivo)   # fallback quando o Vostro está fora
 ```

@@ -11,7 +11,7 @@ Diferente dos outros MCPs do hub, o docling é **pesado** (torch + EasyOCR, imag
 VPS** — roda no **Vostro** (24/7, mais forte), e o VPS só faz proxy pela tailnet:
 
 ```
-cliente -> server.dasg.ltd/docling/mcp (VPS, publico)
+cliente -> your.server.url/docling/mcp (VPS, publico)
         -> [proxy EasyPanel] -> 100.85.101.119:3000 (Vostro, via Tailscale)
         -> Caddy do container (gate X-MCP-Key + strip /docling)
         -> docling-mcp em 127.0.0.1:8000 (Streamable HTTP, FastMCP)
@@ -29,7 +29,7 @@ Como o docling roda no Vostro, ele pode ficar indisponível quando o Vostro perd
 energia ou internet. O fallback **não** é configurado neste wrapper nem no hub —
 é responsabilidade de **cada automação**, direto no n8n:
 
-- Padrão: `try` chama `server.dasg.ltd/docling/mcp`; no `catch` (timeout/erro) o
+- Padrão: `try` chama `your.server.url/docling/mcp`; no `catch` (timeout/erro) o
   fluxo cai para **Gemini vision** (`gemini-2.0-flash`, aceita imagem/PDF) como
   plano B, mantendo a automação viva.
 - Sem esse ramo de fallback, uma queda do Vostro **quebra a automação inteira**.
