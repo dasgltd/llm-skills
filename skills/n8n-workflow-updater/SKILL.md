@@ -5,7 +5,7 @@ description: 'Ultimate proactive skill for creating, editing, and managing n8n w
 
 # n8n Workflow Master: Lifecycle & Safe Execution
 
-## 0. CREDENTIALS (User's n8n — VPS)
+## 0. CREDENTIALS (User's n8n Environment)
 - **API Key**: available as `$N8N_API_KEY` in `~/.hermes/.env` — load it with `source ~/.hermes/.env`
 - **Base URL**: `$N8N_URL` (must be set — ask the user if not in env)
 - **Auth header**: `X-N8N-API-KEY: $N8N_API_KEY`
